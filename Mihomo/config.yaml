@@ -1,6 +1,5 @@
 # 必读！！！
-# 注意规则在满足自己需求情况下，尽量做到精简，不要过度复杂，以免影响性能。
-# 跑裸核用户请自行去掉下方控制面板模块的注释。
+# 自用配置，需要部署DNS服务器，否则nameserver需要用阿里和腾讯的DOH
 # 机场订阅
 proxy-providers:
   机场名称:
@@ -84,8 +83,7 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
   nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+    - 10.0.0.14
     
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
@@ -114,6 +112,7 @@ proxy-groups:
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
+  - IP-CIDR,10.0.0.14/32,直连
   - RULE-SET,private_domain,直连
   - RULE-SET,apple_domain,直连
   - RULE-SET,ai,🤖 AI
